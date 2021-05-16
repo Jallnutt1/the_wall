@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+    <title>The Wall</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="my_message_header">
+            <h1>Hello, {{user.fname}} {{user.lname}}</h1>
+            <p><a href="/logout">Log Out</a></p>    
+        </div>
+        <form action="messagePost" method="post">
+            {% csrf_token %}
+            <p><label for="message">Post a message</label></p>
+            <p><textarea class="mTarea" name="message" id="message"></textarea></p>
+            <p><button type="submit">Post Message!</button></p>
+        </form>
+
+        <div id="bottom">
+            <ul>
+            {% for posted_message in Posted_Messages %}
+                    <li>
+                        <div class="my_message_header">
+                            <h3>{{posted_message.user.fname}} {{posted_message.user.lname}} at {{posted_message.created_at}}</h3>
+                            {% if posted_message.user.id == user.id %}
+                                <p class="test"><a href="deleteMessage/{{posted_message.id}}">Delete Message</a></p>
+                            {% endif %}
+                        </div>    
+                        <p class="written">{{posted_message.message}}</p>
+                    
+                        <ul class="nest">
+                        {% for posted_comment in posted_message.comment.all %}
+                        <li>
+                            <div class="outline">
+                                <div class="my_message_header">
+                                    <h4 class="test">{{posted_comment.user.fname}} {{posted_comment.user.lname}} at
+                                        {{posted_comment.created_at}}</h4>
+                                    {% if posted_comment.user.id == user.id %}
+                                        <p class="test"><a href="deleteComment/{{posted_comment.id}}">Delete Comment</a></p>
+                                    {% endif %}
+                                </div>
+                                <p class="written">{{posted_comment.comment}}</p>
+                            </div>
+                            <br>
+                        
+                        </li>
+                        {% endfor %}
+                            <li>
+                                <form action="commentPost/{{posted_message.id}}" method="post">
+                                {% csrf_token %}
+                                    <p><label for="comment">Post a comment</label></p>
+                                    <p><textarea class="cTarea" name="comment" id="comment"></textarea></p>
+                                    <p><button class="cBtn" type="submit">Post Comment!</button></p>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <br>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

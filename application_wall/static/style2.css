@@ -1,0 +1,68 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+body{
+    background-color: aquamarine;
+}
+p{
+    margin: 5px 0px;
+}
+#wrapper{
+    width:960px;
+    margin:10px auto;
+    padding:10px;
+}
+#head{
+    width:900px;
+    padding: 0px 30px;
+}
+#head ul{
+    display: table;
+    margin: 0px auto;
+}
+#main{
+    display: flex;
+    justify-content: space-around;
+}
+.hor-sec{
+    width:400px;
+    margin: 15px 0px;
+    padding:10px;
+}
+.mTarea{
+    width:960px;
+    height: 75px;
+    font-size:24px;
+}
+.cTarea{
+    width:910px;
+    height: 30px;
+    font-size:24px;
+}
+/* .message {
+    border: 1px solid black;
+} */
+ul{
+    list-style-type: none;
+}
+.cBtn{
+    margin-left: 800px;
+}
+.written{
+    color:blue;
+}
+.nest{
+    margin-left: 50px;
+}
+.my_message_header{
+    display: flex;
+    justify-content: space-between;
+    vertical-align: top;
+}
+.outline{
+    border: 1px solid red;
+}
+/* .test{
+    border: 1px solid black;
+} */
